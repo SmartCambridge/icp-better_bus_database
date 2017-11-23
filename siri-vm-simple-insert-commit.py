@@ -65,4 +65,4 @@ for dir in sys.argv[1:]:
                     json.dumps(record),
                 ))
 
-conn.commit()
+            conn.commit()

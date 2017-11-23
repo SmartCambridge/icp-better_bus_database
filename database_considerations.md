@@ -93,8 +93,7 @@ possible). Tests were run 5 times.
 
 ```
 psql -c "truncate siri_vm_simple_test" acp
-./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ \
-                              | pgloader siri-vm-to-simple-database.load
+./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-simple-database.load
 ```
 
 Mean: 171 sec;
@@ -130,8 +129,7 @@ UPDATE siri_vm_complex_test set
 ```
 psql -c "truncate siri_vm_complex_test" acp
 psql -f drop_complex_indexes.sql acp
-./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ \
-                | pgloader siri-vm-to-complex-database-with-update.load
+./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-complex-database-with-update.load
 psql -f add_complex_indexes.sql acp
 ```
 
@@ -143,8 +141,7 @@ Min: 189 sec;
 
 ```
 psql -c "truncate siri_vm_complex_test" acp
-./siri-vm-to-complex-csv.py ../data/sirivm_json/data_bin/2017/10/27/ \
-                             | pgloader siri-vm-to-complex-database.load
+./siri-vm-to-complex-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-complex-database.load
 ```
 
 Mean: 171 sec;
@@ -156,8 +153,7 @@ Min: 170 sec
 ```
 psql -c "truncate siri_vm_complex_test" acp
 psql -f drop_complex_indexes.sql acp
-./siri-vm-to-complex-sql.py ../data/sirivm_json/data_bin/2017/10/27/ \
-                                                          | psql -q acp
+./siri-vm-to-complex-sql.py ../data/sirivm_json/data_bin/2017/10/27/ | psql -q acp
 psql -f add_complex_indexes.sql acp
 ```
 

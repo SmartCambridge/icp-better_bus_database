@@ -2,8 +2,8 @@
 
 '''
 Given one or more directories containing SIRI-VM data in 
-Json on the command line, insert the request_data records into 
-siri_vm_test1
+Json on the command line, insert drrived fields and the request_data 
+records into siri_vm_complex_test
 '''
 
 import json
@@ -45,7 +45,8 @@ import psycopg2
 conn = psycopg2.connect("dbname='acp' host='localhost'")
 cur = conn.cursor()
 
-insert = 'INSERT INTO siri_vm_simple_test (info) values (%s)'
+insert = ('INSERT INTO siri_vm_complex_test (acp_id, location4d, acp_ts, info) '
+         'values (%s, %s, to_timestamp(%s), %s)')
 
 for dir in sys.argv[1:]:
     for root, dirs, files in os.walk(dir):
@@ -61,8 +62,17 @@ for dir in sys.argv[1:]:
 
             for record in data["request_data"]:
 
+                point = "SRID=4326;POINT({} {} 0 {})".format(
+                    record["acp_lng"],
+                    record["acp_lat"],
+                    record["acp_ts"]
+                    )
+
                 cur.execute(insert, (
+                    record["acp_id"],
+                    point,
+                    record["acp_ts"],
                     json.dumps(record),
                 ))
 
-conn.commit()
+            conn.commit()

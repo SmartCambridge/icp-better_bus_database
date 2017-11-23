@@ -19,3 +19,13 @@
 
 # With Python
 ./timeit.sh 5 'psql -c "truncate siri_vm_complex_test" acp; psql -f drop_complex_indexes.sql acp; ./siri-vm-complex-insert.py siri_vm3 ../data/sirivm_json/data_bin/2017/10/27/; psql -f add_complex_indexes.sql acp'
+
+## Appending data
+
+# Simple schema
+
+./timeit.sh 5 'psql -c "truncate siri_vm_simple_test" acp; ./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-simple-database.load; ./siri-vm-simple-insert-commit.py ../data/sirivm_json/data_bin/2017/10/26/'
+
+# Complex schema
+
+./timeit.sh 5 'psql -c "truncate siri_vm_complex_test" acp; ./siri-vm-to-complex-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-complex-database.load; ./siri-vm-complex-insert-commit.py ../data/sirivm_json/data_bin/2017/10/26/'
