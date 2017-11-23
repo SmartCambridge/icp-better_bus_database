@@ -1,0 +1,23 @@
+LOAD CSV
+    FROM stdin WITH ENCODING utf8
+       HAVING FIELDS
+       (
+          info
+       )
+    INTO postgresql:///acp?siri_vm_complex_test
+       TARGET COLUMNS
+       (
+          info
+       )
+    WITH fields optionally enclosed by '"',
+         fields escaped by double-quote,
+         fields terminated by ','
+    AFTER LOAD DO
+         $$ UPDATE siri_vm_complex_test set
+              acp_id = info->>'acp_id',
+              location4d = ST_GeogFromText('SRID=4326;POINT(' || (info->>'acp_lng') || ' ' || (info->>'acp_lat') || ' 0 ' || (info->>'acp_ts') || ')'),
+              acp_ts = to_timestamp((info->>'acp_ts')::double precision);
+         $$
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';
+

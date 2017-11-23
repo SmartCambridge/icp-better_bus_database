@@ -1,0 +1,26 @@
+LOAD CSV
+    FROM stdin WITH ENCODING utf8
+       HAVING FIELDS
+       (
+          acp_id,
+          location4d,
+          acp_ts,
+          info
+       )
+    INTO postgresql:///acp?siri_vm_complex_test
+       TARGET COLUMNS
+       (
+          acp_id,
+          location4d,
+          acp_ts 'TIMESTAMP WITH TIME ZONE' using (unix-timestamp-to-timestamptz acp_ts),
+          info
+       )
+    WITH drop indexes,
+         fields optionally enclosed by '"',
+         fields escaped by double-quote,
+         fields terminated by ','
+
+
+
+    SET work_mem to '32 MB', maintenance_work_mem to '64 MB';
+

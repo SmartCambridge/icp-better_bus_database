@@ -1,0 +1,19 @@
+Processing data for 2017-10-27:
+
+Extracting data: ~0m45.760s
+
+populating siri-vm1 (just json): 2m57.766s 3m0.589s 1m59.638s
+
+populating siri-vm2 (load json, populate other cols): 4m16.405s 4m22.070s
+
+populating siri-vm3 (load json and other columns): 2m54.657s 2m56.896s
+
+Extracting SQL: 1m19.339s, 0m40.186s, 0m30.930s
+
+populating siri-vm4 (naive 'INSERT INTO', without indexing): 24m41.446s 2m41.912s
+  + 3m25.013s 3m22.674s for indexing
+
+adding _another_ day to a live & indexed database: 7m22.878s
+
+
+Loading SIRI-VM to date (2017-10-11 - 2017-11-17) took 136m41.382s (copy: 1h21m30.840s, indexing 1h32m5.646s)

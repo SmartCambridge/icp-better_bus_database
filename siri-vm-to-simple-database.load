@@ -1,10 +1,12 @@
 LOAD CSV
     FROM stdin WITH ENCODING utf8
-    INTO postgresql:///acp?siri_vm
+       HAVING FIELDS
+       (
+          info
+       )
+    INTO postgresql:///acp?siri_vm_simple_test
        TARGET COLUMNS
-       (  --acp_id,
-          --location4d,
-          ---acp_ts,
+       (
           info
        )
     WITH drop indexes,

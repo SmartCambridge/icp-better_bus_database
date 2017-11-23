@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 
 '''
-Given one or more directories containing SIRI-VM data in Json, spit out
-journey records in a format for loading into the database.
+Given one or more directories containing SIRI-VM data in 
+Json on the command line, insert the request_data records into 
+siri_vm_test1
 '''
 
 import json
 import sys
 import os
-import csv
+import psycopg2
 
 '''
    "request_data": [
@@ -41,24 +42,27 @@ import csv
         },
 '''
 
+conn = psycopg2.connect("dbname='acp' host='localhost'")
+cur = conn.cursor()
 
-csvwriter = csv.writer(sys.stdout)
+insert = 'INSERT INTO siri_vm_simple_test (info) values (%s)'
 
 for dir in sys.argv[1:]:
     for root, dirs, files in os.walk(dir):
-        for f in files:
-            filename = os.path.join(root, f)
+        for filename in files:
+            print('.', end='', flush=True)
             # Skip any non-json files
             if not filename.endswith(".json"):
                 continue
+            pathname = os.path.join(root, filename)
 
-            with open(filename) as data_file:
+            with open(pathname) as data_file:
                 data = json.load(data_file)
 
             for record in data["request_data"]:
-                csvwriter.writerow ((
-                    #record["acp_id"],
-                    #"ST_GeogFromText('SRID=4326;POINT({} {} 0 0)')".format(record["acp_lng"], record["acp_lat"]),
-                    #record["acp_ts"],
+
+                cur.execute(insert, (
                     json.dumps(record),
                 ))
+
+conn.commit()
