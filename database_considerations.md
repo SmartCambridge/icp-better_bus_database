@@ -96,7 +96,7 @@ psql -c "truncate siri_vm_simple_test" acp
 ./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-simple-database.load
 ```
 
-Mean: 171 sec;
+Mean: 171 sec (2m51s);
 Max: 176 sec;
 Min: 169 sec
 
@@ -109,7 +109,7 @@ psql -f drop_simple_indexes.sql acp
 psql -f add_simple_indexes.sql acp
 ```
 
-Mean: 211 sec;
+Mean: 211 sec (3m31s);
 Max: 230 sec;
 Min: 196 sec
 
@@ -133,7 +133,7 @@ psql -f drop_complex_indexes.sql acp
 psql -f add_complex_indexes.sql acp
 ```
 
-Mean: 199 sec;
+Mean: 199 sec (3m19s);
 Max: 237 sec;
 Min: 189 sec;
 
@@ -144,7 +144,7 @@ psql -c "truncate siri_vm_complex_test" acp
 ./siri-vm-to-complex-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-complex-database.load
 ```
 
-Mean: 171 sec;
+Mean: 171 sec (2m51s);
 Max: 173 sec;
 Min: 170 sec
 
@@ -157,7 +157,7 @@ psql -f drop_complex_indexes.sql acp
 psql -f add_complex_indexes.sql acp
 ```
 
-Mean: 219 sec;
+Mean: 219 sec (3m39s);
 Max: 221 sec;
 Min: 215 sec
 
@@ -170,7 +170,60 @@ psql -f drop_complex_indexes.sql acp
 psql -f add_complex_indexes.sql acp
 ```
 
-Mean: 205 sec;
+Mean: 205 sec (3m25s);
 Max: 208 sec;
-Min: 204 sec
+Min: 204 
 
+### Results
+
+Loading CSV data with `pgloader` was the fastest strategy, followed
+by loading simple CSV and subsequently running UPDATE TABLE to populate
+additional columns. These were followed by doing the upload from a
+script, with creating and executing SLQ INSERT statements last. The
+slowest method took about 30% longer than the fastest.
+
+The schema chosen makes very little difference to the load time.
+
+Appending results
+-----------------
+
+Appending results, particularly in real time, is a different situation
+from bulk loading them, not least because the option of droping indexes
+and re-adding them isn't available.
+
+Here are a couple of tests, one for each of the simple and complex
+schema, that involve loading one days worth of data by the fastest
+method above and then loading a further day's data. In each case the
+subsequent load was done with indexes defined and with a commit after
+loading the records from each SIRI+VM JSON file:
+
+### Simple schema:
+
+```
+psql -c "truncate siri_vm_simple_test" acp
+./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ |
+pgloader siri-vm-to-simple-database.load
+./siri-vm-simple-insert-commit.py ../data/sirivm_json/data_bin/2017/10/26/
+```
+
+Mean: 683 sec (11m23s);
+Max: 693 sec;
+Min: 680 sec
+
+Uploading the first day will have taken about 171 sec (see above),
+so the additional day took about 512 sec (8m32s).
+
+### Complex schema
+
+```
+psql -c "truncate siri_vm_complex_test" acp
+./siri-vm-to-complex-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-complex-database.load
+./siri-vm-complex-insert-commit.py ../data/sirivm_json/data_bin/2017/10/26/
+```
+
+Mean: 668 sec (11m8s);
+Max: 692 sec;
+Min: 650 sec
+
+Uploading the first day will have taken about 171 sec (see above),
+so the additional day took about 497 sec (8m17s).
