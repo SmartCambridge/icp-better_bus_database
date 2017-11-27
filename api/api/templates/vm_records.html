@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+  <ul>
+  {% for record in records %}
+    <li><h2>{{ record[0] }}</h2>{{ record[1] }} - {{ record[2] }}
+  {% else %}
+    <li><em>Unbelievable.  No entries here so far</em>
+  {% endfor %}
+  </ul>
+{% endblock %}

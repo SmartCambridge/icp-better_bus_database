@@ -1,0 +1,31 @@
+NOTES
+
+siri_vm API
+
+Select where
+
+  DestinationRef           is one of
+  DirectionRef             is one of
+  Position                 within box
+  LineRef                  is one of
+  OperatorRef              is one of
+  OriginAimedDepartureTime is between
+  OriginRef                is one of
+  VehicleRef               is one of
+  RecordedAtTime           is between
+
+siri_vm_search?bbox=wsen;ts_range=t1t2;DepartureTime_range=t1t2;
+
+field:OriginRef=r1,r2,...
+field:DestinationRef=r1,r2,...
+field:DirectionRef=r1,r2,...
+field:LineRef=r1,r2,...
+field:OperatorRef=r1,r2,...
+field:VehicleRef=r1,r2,...
+
+fields=f1,f2,...
+page=
+limit=
+format=geojson,flat,csv
+datetime=friendly, friendlydate, sqldatetime, unixtime
+debug=
