@@ -48,17 +48,13 @@ csvwriter = csv.writer(sys.stdout)
 for dir in sys.argv[1:]:
     for root, dirs, files in os.walk(dir):
         for filename in files:
-            # Skip any non-json files, extract timestamp from filename
-            #1510911874.234_2017-11-17-09-44-34.json
-            match = re.match(r'(\d+\.\d+)_.*.json', filename)
-            if match:
-                file_ts = match.group(1)
-            else:
+            if not filename.endswith(".json"):
                 continue
             pathname = os.path.join(root, filename)
-
             with open(pathname) as data_file:
                 data = json.load(data_file)
+
+            file_ts = data["ts"]
 
             for record in data["request_data"]:
                 csvwriter.writerow ((
