@@ -1,7 +1,7 @@
 Database considerations
 =======================
 
-v1.1 - 2017-11-23
+v1.0 - 2017-11-24
 
 Some investigation into loading siri-vm data into a Postgres database.
 
@@ -174,7 +174,7 @@ Mean: 205 sec (3m25s);
 Max: 208 sec;
 Min: 204 
 
-### Results
+### Conclusions
 
 Loading CSV data with `pgloader` was the fastest strategy, followed
 by loading simple CSV and subsequently running UPDATE TABLE to populate
@@ -192,17 +192,16 @@ from bulk loading them, not least because the option of droping indexes
 and re-adding them isn't available.
 
 Here are a couple of tests, one for each of the simple and complex
-schema, that involve loading one days worth of data by the fastest
+schema, that involve loading one day's worth of data by the fastest
 method above and then loading a further day's data. In each case the
 subsequent load was done with indexes defined and with a commit after
-loading the records from each SIRI+VM JSON file:
+loading the records from each SIRI+VM JSON file.
 
 ### Simple schema:
 
 ```
 psql -c "truncate siri_vm_simple_test" acp
-./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ |
-pgloader siri-vm-to-simple-database.load
+./siri-vm-to-simple-csv.py ../data/sirivm_json/data_bin/2017/10/27/ | pgloader siri-vm-to-simple-database.load
 ./siri-vm-simple-insert-commit.py ../data/sirivm_json/data_bin/2017/10/26/
 ```
 
@@ -227,3 +226,10 @@ Min: 650 sec
 
 Uploading the first day will have taken about 171 sec (see above),
 so the additional day took about 497 sec (8m17s).
+
+### Conclusions
+
+Loading into the complex schema seems to be slightly faster than the
+simple one. This could be becasue maintaining the functional indexes
+based on data in the JSON is slightly more complex than diirectly
+indexing columns.
