@@ -1,5 +1,5 @@
 LOAD CSV
-    FROM stdin WITH ENCODING utf8
+    FROM sirivm_load_data.csv WITH ENCODING utf8
        HAVING FIELDS
        (
           acp_id,
@@ -8,14 +8,14 @@ LOAD CSV
           info,
           file_ts
        )
-    INTO postgresql:///acp?siri_vm
+    INTO postgresql:///tfcapi?siri_vm
        TARGET COLUMNS
        (
           acp_id,
           location4d,
-          acp_ts 'TIMESTAMP WITH TIME ZONE' using (unix-timestamp-to-timestamptz acp_ts),
+          acp_ts "TIMESTAMP WITH TIME ZONE" using (unix-timestamp-to-timestamptz acp_ts),
           info,
-          file_ts 'TIMESTAMP WITH TIME ZONE' using (unix-timestamp-to-timestamptz file_ts)
+          file_ts "TIMESTAMP WITH TIME ZONE" using (unix-timestamp-to-timestamptz file_ts)
        )
     WITH drop indexes,
          fields optionally enclosed by '"',
