@@ -43,6 +43,6 @@ CREATE TABLE siri_vm (
 
 
 CREATE INDEX siri_vm_acp_id ON siri_vm (acp_id);
-CREATE INDEX siri_vm_location4d ON siri_vm USING GIST (location4d);
+CREATE INDEX siri_vm_location4d ON siri_vm USING GIST ((location4d::geometry));
 CREATE INDEX siri_vm_acp_ts ON siri_vm (acp_ts);
 CREATE INDEX siri_vm_info ON siri_vm USING GIN (info);
