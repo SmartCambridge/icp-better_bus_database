@@ -1,0 +1,34 @@
+LOAD CSV
+    FROM sirivm_load_data2.csv WITH ENCODING utf8
+       HAVING FIELDS
+       (
+          file_ts,
+          acp_id,
+          acp_ts,
+          temp_geom,
+          line_ref,
+          origin_ref,
+          origin_departure_ts,
+          info
+       )
+    INTO postgresql:///tfcapi?siri_vm2
+       TARGET COLUMNS
+       (
+          file_ts "TIMESTAMP WITH TIME ZONE" using (unix-timestamp-to-timestamptz file_ts),
+          acp_id,
+          acp_ts "TIMESTAMP WITH TIME ZONE" using (unix-timestamp-to-timestamptz acp_ts),
+          temp_geom,
+          line_ref,
+          origin_ref,
+          origin_departure_ts,
+          info
+       )
+    WITH drop indexes,
+         fields optionally enclosed by '"',
+         fields escaped by double-quote,
+         fields terminated by ','
+
+
+
+    SET work_mem to '1GB', maintenance_work_mem to '1GB';
+
