@@ -10,6 +10,7 @@ import sys
 import os
 import csv
 import re
+import datetime
 
 '''
    "request_data": [
@@ -54,13 +55,13 @@ for dir in sys.argv[1:]:
             with open(pathname) as data_file:
                 data = json.load(data_file)
 
-            file_ts = data["ts"]
+            file_ts = datetime.datetime.utcfromtimestamp(data["ts"]).isoformat() + '+00:00'
 
             for record in data["request_data"]:
                 csvwriter.writerow ((
                     file_ts,
                     record["acp_id"],
-                    record["acp_ts"],
+                    record["RecordedAtTime"],
                     "SRID=4326;POINT({} {} 0 {})".format(
                         record["acp_lng"],
                         record["acp_lat"],

@@ -35,7 +35,7 @@ CREATE EXTENSION postgis;
 /* SRID 27700 is OSGB */
 
 CREATE TABLE siri_vm2 (
-    id                       BIGSERIAL PRIMARY KEY,
+    id                       BIGSERIAL NOT NULL,
     file_ts                  TIMESTAMP WITH TIME ZONE NOT NULL,
     acp_id                   CHAR(20) NOT NULL,
     acp_ts                   TIMESTAMP WITH TIME ZONE NOT NULL,
@@ -47,14 +47,15 @@ CREATE TABLE siri_vm2 (
     temp_geom                GEOMETRY(POINTZM,4326) NOT NULL
    );
 
-
+CREATE UNIQUE INDEX siri_vm2_pkey ON siri_vm2 (id);
+ALTER TABLE siri_vm2 ADD PRIMARY KEY USING INDEX siri_vm2_pkey;
 CREATE INDEX siri_vm2_acp_id ON siri_vm2 (acp_id);
 CREATE INDEX siri_vm2_acp_ts ON siri_vm2 (acp_ts);
-CREATE INDEX siri_vm2_location4d ON siri_vm2 USING GIST ((location4d));
+CREATE INDEX siri_vm2_location4d ON siri_vm2 USING GIST (location4d);
 CREATE INDEX siri_vm2_line_ref ON siri_vm2 (line_ref);
 CREATE INDEX siri_vm2_origin_ref ON siri_vm2 (origin_ref);
 CREATE INDEX siri_vm2_origin_departure_ts ON siri_vm2 (origin_departure_ts);
 
 // And then
 // update siri_vm2 set location4d = ST_Transform(temp_geom, 27700);
-// 
+

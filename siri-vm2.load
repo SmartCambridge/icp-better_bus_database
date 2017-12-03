@@ -30,5 +30,5 @@ LOAD CSV
 
 
 
-    SET work_mem to '1GB', maintenance_work_mem to '1GB';
+    SET work_mem to '32MB', maintenance_work_mem to '32MB';
 
