@@ -3,7 +3,7 @@
 database='tfcapi'
 table='siri_vm_3'
 loader='siri-vm-to-csv3.py'
-load_pattern='2017/11/27'
+load_pattern=''
 work_mem='2GB'
 maintenance_work_mem='2GB'
 
