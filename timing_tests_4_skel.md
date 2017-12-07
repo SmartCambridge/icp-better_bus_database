@@ -25,6 +25,23 @@ Indexes:
     "siri_vm_4_location4d_geom_nd" gist ((location4d::geometry) gist_geometry_ops_nd)
 ```
 
+This schema puts the acm\_\* fields into their own columns and indexes
+them, extracts the 2d and 4d positions as geoGRAHPy and indexes those (a
+few ways, to  see what happens) and indexes info as a whole. Significant
+issues are  doing any sort of date extraction from the (string)
+OriginAimedDepartureTime field, and the fact that location indexes are
+all in geoGRAPHy and so can only be used with  geogRAPHy comparison
+operators (which doesn't include '~'). There's also the issue that I've
+never managed to get a gist_geometry_ops_nd index to be used for
+anything...
+
+Generally end up using e.g. `ST_MakeEnvelope (0.08008, 52.205029,
+0.108576, 52.215548, 4326) ~ location2d::geometry` for containment tests, and
+e.g. extract(epoch from '2017-10-12
+00:00:00+01:00'::timestamptz)::bigint for tests against acp_ts.
+
+Loading times:
+
 ```
 BEGIN;
 BEGIN
@@ -82,6 +99,9 @@ user    57m14.116s
 sys     4m9.384s
 ```
 
+
+
+
 Small box
 ---------
 
@@ -94,7 +114,7 @@ select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and
 """
 
 """
-select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry)
+select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location2d::geometry)
 """
 
 One day
@@ -103,7 +123,7 @@ One day
 Try just retrieving a full day's data:
 
 """
-select info from siri_vm_4 where acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+select info from siri_vm_4 where acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint;
 """
 
 Small box and one day
@@ -112,11 +132,11 @@ Small box and one day
 Add in a 24 hour time constraint:
 
 """
-select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint;
 """
 
 """
-select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location2d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint;
 """
 
 Big box and one day
@@ -125,11 +145,11 @@ Big box and one day
 A bigger box (Sawston <-> Cotenham, Camborne <-> Fulbourn) -0.100000,52.110000,0.250000,52.300000
 
 """
-select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint;
 """
 
 """
-select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location2d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint;
 """
 
 Big box, one day and acp\_id
@@ -138,11 +158,11 @@ Big box, one day and acp\_id
 acp\_id has it's own column and index. This is the IJL 'indicitave' query
 
 """
-select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint and acp_id = 'WP-106';
 """
 
 """
-select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location2d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint and acp_id = 'WP-106';
 """
 
 Big box, one day and "VehicleRef" in place of acp\_id
@@ -151,20 +171,21 @@ Big box, one day and "VehicleRef" in place of acp\_id
 Try using info @> '{"VehicleRef": "WP-107"} instead
 
 """
-select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint and info @> '{"VehicleRef" : "WP-107"}';
 """
 
+
 """
-select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location2d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint and info @> '{"VehicleRef" : "WP-107"}';
 """
 
 Big box, one day, "VehicleRef" and "LineRef"
 --------------------------------------------
 
 """
-select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
 """
 
 """
-select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location2d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz)::bigint and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz)::bigint and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
 """
