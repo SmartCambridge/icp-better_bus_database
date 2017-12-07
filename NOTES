@@ -52,13 +52,14 @@ select info from siri_vm2 where
           EXTRACT (EPOCH from TIMESTAMP WITH TIME ZONE '2017-10-13 00:00:00+01:00')
         ),
         4326
-      ),
+      )
     ),
     27700
   )
   &&&
   location4d;
 
+select info from siri_vm2 where ST_Transform( ST_MakeLine( ST_SetSRID( ST_MakePoint( -0.100000, 52.110000, 0, EXTRACT ( EPOCH from TIMESTAMP WITH TIME ZONE '2017-10-12 00:00:00+01:00' ) ), 4326 ), ST_SetSRID( ST_MakePoint( 0.250000, 52.300000, 0, EXTRACT ( EPOCH from TIMESTAMP WITH TIME ZONE '2017-10-13 00:00:00+01:00' ) ), 4326 ) ), 27700 ) &&& location4d;
+
 Ran this (with only &&) fo 4h45m without getting any results,
 despite 'explain' claiming it would use the index.
-
