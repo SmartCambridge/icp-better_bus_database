@@ -59,3 +59,6 @@ select info from siri_vm2 where
   &&&
   location4d;
 
+Ran this (with only &&) fo 4h45m without getting any results,
+despite 'explain' claiming it would use the index.
+
