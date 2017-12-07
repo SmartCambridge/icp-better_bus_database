@@ -89,175 +89,82 @@ The box is this:
 http://bboxfinder.com/#52.205029,0.080080,52.215548,0.108576 (roughly
 Maddingly Road inbound). Returns about 30,000 records
 
-```
-=============================================================================
-Testing "select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548;" with 10 iterations and work_mem 2GB
+"""
+select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548
+"""
 
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548;
-                                                                                               QUERY PLAN                                                                                               
---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Bitmap Heap Scan on siri_vm_4  (cost=84455.24..383317.55 rows=83816 width=739) (actual time=6665.304..8668.570 rows=363275 loops=1)
-   Recheck Cond: ((acp_lng >= '0.08008'::double precision) AND (acp_lng <= '0.108576'::double precision) AND (acp_lat >= '52.205029'::double precision) AND (acp_lat <= '52.215548'::double precision))
-   Heap Blocks: exact=349629
-   ->  BitmapAnd  (cost=84455.24..84455.24 rows=83816 width=0) (actual time=6472.694..6472.694 rows=0 loops=1)
-         ->  Bitmap Index Scan on siri_vm_4_acp_lng  (cost=0.00..22672.12 rows=1081155 width=0) (actual time=1798.334..1798.334 rows=1131691 loops=1)
-               Index Cond: ((acp_lng >= '0.08008'::double precision) AND (acp_lng <= '0.108576'::double precision))
-         ->  Bitmap Index Scan on siri_vm_4_acp_lat  (cost=0.00..61740.97 rows=2944440 width=0) (actual time=4385.171..4385.171 rows=3002448 loops=1)
-               Index Cond: ((acp_lat >= '52.205029'::double precision) AND (acp_lat <= '52.215548'::double precision))
- Planning time: 18.404 ms
- Execution time: 8689.302 ms
-(10 rows)
-
-
-latency average: 6321.698 ms
-latency stddev: 569.455 ms
-
-```
-
-```
-=============================================================================
-Testing "select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry)" with 10 iterations and work_mem 2GB
-
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry)
-                                                                                                                     QUERY PLAN                                                                                                                      
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
- Seq Scan on siri_vm_4  (cost=0.00..4817245.96 rows=37981 width=739) (actual time=0.124..255552.526 rows=363275 loops=1)
-   Filter: ('0103000020E61000000100000005000000554D10751F80B43FA5DDE8633E1A4A40554D10751F80B43FEE5BAD13971B4A4030682101A3CBBB3FEE5BAD13971B4A4030682101A3CBBB3FA5DDE8633E1A4A40554D10751F80B43FA5DDE8633E1A4A40'::geometry ~ (location4d)::geometry)
-   Rows Removed by Filter: 37617403
- Planning time: 277.416 ms
- Execution time: 255619.745 ms
-(5 rows)
-
-
-latency average: 39.910 ms
-latency stddev: 83.690 ms
-
-```
+"""
+select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry)
+"""
 
 One day
 -------
 
 Try just retrieving a full day's data:
 
-```
-=============================================================================
-Testing "select info from siri_vm_4 where acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);" with 10 iterations and work_mem 2GB
-
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
-
-
-```
-
+"""
+select info from siri_vm_4 where acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+"""
 
 Small box and one day
 ---------------------
 
 Add in a 24 hour time constraint:
 
-```
-=============================================================================
-Testing "select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);" with 10 iterations and work_mem 2GB
+"""
+select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+"""
 
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where acp_lng >= 0.08008 and acp_lat >= 52.205029 and acp_lng <= 0.108576 and acp_lat <= 52.215548 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
-
-
-```
-
-```
-=============================================================================
-Testing "select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);" with 10 iterations and work_mem 2GB
-
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
-
-
-```
+"""
+select info from siri_vm_4 where (ST_MakeEnvelope (0.08008, 52.205029, 0.108576, 52.215548, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+"""
 
 Big box and one day
 -------------------
 
 A bigger box (Sawston <-> Cotenham, Camborne <-> Fulbourn) -0.100000,52.110000,0.250000,52.300000
 
-```
-=============================================================================
-Testing "select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);" with 10 iterations and work_mem 2GB
+"""
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+"""
 
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
-
-
-```
-
-```
-=============================================================================
-Testing "select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);" with 10 iterations and work_mem 2GB
-
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
-
-
-```
+"""
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz);
+"""
 
 Big box, one day and acp\_id
 ---------------------------
 
 acp\_id has it's own column and index. This is the IJL 'indicitave' query
 
-```
-=============================================================================
-Testing "select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';" with 10 iterations and work_mem 2GB
+"""
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';
+"""
 
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';
-
-
-```
-
-```
-=============================================================================
-Testing "select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';" with 10 iterations and work_mem 2GB
-
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';
-
-
-```
+"""
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and acp_id = 'WP-106';
+"""
 
 Big box, one day and "VehicleRef" in place of acp\_id
 ----------------------------------------------------
 
 Try using info @> '{"VehicleRef": "WP-107"} instead
 
-```
-=============================================================================
-Testing "select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';" with 10 iterations and work_mem 2GB
+"""
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';
+"""
 
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';
-
-
-```
-
-```
-=============================================================================
-Testing "select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';" with 10 iterations and work_mem 2GB
-
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';
-
-
-```
+"""
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}';
+"""
 
 Big box, one day, "VehicleRef" and "LineRef"
 --------------------------------------------
 
-```
-=============================================================================
-Testing "select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';" with 10 iterations and work_mem 2GB
+"""
+select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
+"""
 
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where acp_lng >= -0.100000 and acp_lat >= 52.110000 and acp_lng <= 0.250000 and acp_lat <= 52.300000 and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
-
-
-```
-
-```
-=============================================================================
-Testing "select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';" with 10 iterations and work_mem 2GB
-
-set work_mem to '2GB'; explain analyse select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extratc(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
-
-
-```
+"""
+select info from siri_vm_4 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location4d::geometry) and acp_ts >= extract(epoch from '2017-10-12 00:00:00+01:00'::timestamptz) and acp_ts < extract(epoch from '2017-10-13 00:00:00+01:00'::timestamptz) and info @> '{"VehicleRef" : "WP-107"}' and info @> '{"LineRef": "U"}';
+"""
