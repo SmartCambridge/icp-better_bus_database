@@ -51,7 +51,7 @@ Try just retrieving a full day's data:
 
 ```execute
 select info from siri_vm where acp_ts >= '2017-10-12 00:00:00+01:00' and acp_ts < '2017-10-13 00:00:00+01:00';
-```execute
+```
 
 Big box and one day
 -------------------

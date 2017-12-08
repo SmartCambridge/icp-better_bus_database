@@ -124,5 +124,5 @@ select info from siri_vm_5 where acp_lng >= -0.100000 and acp_lat >= 52.110000 a
 ```
 
 ```execute
-select info from siri_vm_5 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location2d::geometry) and acp_ts >= e1507762800  and acp_ts < 1507849200 and acp_id = 'WP-106';
+select info from siri_vm_5 where (ST_MakeEnvelope(-0.100000,52.110000,0.250000,52.300000, 4326) ~ location2d::geometry) and acp_ts >= 1507762800  and acp_ts < 1507849200 and acp_id = 'WP-106';
 ```
