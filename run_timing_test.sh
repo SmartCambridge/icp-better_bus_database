@@ -6,11 +6,23 @@ iterations='10'
 
 setup="set work_mem to '${work_mem}'"
 
-echo "============================================================================="
 echo "Testing \"${@}\" with ${iterations} iterations and work_mem ${work_mem}"
 
 echo
-psql -e -c "${setup}; explain analyse ${@}" "${database}"
+echo "Flushing buffers"
+sudo sh -c 'sync && echo 3 > /proc/sys/vm/drop_caches'
+
+echo
+echo "Restarting Postgres"
+sudo service postgresql restart
+
+echo
+psql -d "${database}" -e -f - <<EOF
+\timing off
+\pset pager off
+${setup};
+explain analyse ${@}
+EOF
 
 echo
 echo "${setup}; ${@}" |\
