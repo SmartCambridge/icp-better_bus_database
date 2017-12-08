@@ -10,17 +10,18 @@ do
   then
     :
 
-  # Track quoted block state
-  elif [[ "${REPLY}" == '"""' ]]
+  # Start of execution block
+  elif [[ "${REPLY}" == '```execute' ]]
   then
-    if [[ "${in_quoted}" == 'true' ]]
-    then
-      in_quoted='false'
-    else
-      in_quoted='true'
-    fi
+    in_quoted='true'
     # ..and convert to backtics
-  echo '```'
+    echo '```'
+
+  # End of execution block
+  elif [[ "${REPLY}" == '```'* && "${in_quoted}" == 'true' ]] 
+  then
+    in_quoted='false'
+    echo '```'
 
   # Execute REPLYs inside quoted block
   elif [[ "${in_quoted}" == 'true' ]]
