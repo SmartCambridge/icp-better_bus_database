@@ -1,8 +1,14 @@
 -- Print size stats for the various siri_vm databases
 
+\pset pager off
+\timing off
+
 \d siri_vm
 \d siri_vm2
 \d siri_vm_3
+\d siri_vm_4
+\d siri_vm_5
+\d siri_vm_5_2017_41
 
 SELECT
     relname as tablename,
