@@ -8,8 +8,8 @@ work_mem='2GB'
 maintenance_work_mem='2GB'
 
 # Make this work on laptop and tfc servers
-if [[ -d '/Users/jw35/icp/data/' ]]; then
-    load_path="/Users/jw35/icp/data/sirivm_json/data_bin/${load_pattern}"
+if [[ -d "${HOME}/icp/data/" ]]; then
+    load_path="${HOME}/icp/data/sirivm_json/data_bin/${load_pattern}"
 else
     load_path="/media/tfc/sirivm_json/data_bin/${load_pattern}"
 fi
