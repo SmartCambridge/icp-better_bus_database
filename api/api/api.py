@@ -39,6 +39,8 @@ def get_db():
     if not hasattr(g, 'db'):
         app.logger.info("Opening database connection")
         g.db = psycopg2.connect(app.config['DATABASE'])
+        cur = g.db.cursor()
+        cur.execute('set statement_timeout = 120000')
     return g.db
 
 
@@ -63,7 +65,7 @@ def build_vm_query():
     '''
 
     filters = []
-    limit = 1000
+    limit = 200
 
     # Loop through query args
     for key, value in request.args.items():
@@ -72,44 +74,49 @@ def build_vm_query():
 
         # limit=value
         if key == 'limit':
-            limit = int(values)
+            match = re.match(r'^(\d+)$', value)
+            if match:
+                limit = int(match.group(1))
+            else:
+                app.logger.warn('Unrecognised limit value: %s', value)
+                abort(400, 'Unrecognised limit value: {0}'.format(value))
 
         # acp-id=ref[,ref,...] (aka VehicleRaf)
-        elif key = 'acp-id':
+        elif key == 'acp-id':
             if ',' in value:
-                filters.append(sql.SQL('acp-id in {1}').format(
+                filters.append(sql.SQL('acp-id in {0}').format(
                     sql.SQL(', ').join([sql.Literal(x) for x in re.split(r',',values)])))
             else:
-                filters.append(sql.SQL('acp-id = {1}').format(value))
+                filters.append(sql.SQL('acp-id = {0}').format(value))
 
         # bbox=w,s,e,n, expressing acp_lng, acp_lat
         elif key == 'bbox':
-            match = re.match(r'(\d+),(\d+),(\d+),(\d+)',value)
+            match = re.match(r'(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?),(\d+(?:\.\d+)?)',value)
             if match:
-                w = match(1)
-                s = match(2)
-                e = match(3)
-                n = match(4)
-                filters.append(sql.SQL('acp_lng is between {1} and {2}').format(
+                w = float(match.group(1))
+                s = float(match.group(2))
+                e = float(match.group(3))
+                n = float(match.group(4))
+                filters.append(sql.SQL('acp_lng between {0} and {1}').format(
                     sql.Literal(w), sql.Literal(e)))
-                filters.append(sql.SQL('acp_lat is between {1} and {2}').format(
+                filters.append(sql.SQL('acp_lat between {0} and {1}').format(
                     sql.Literal(s), sql.Literal(n)))
             else:
                 app.logger.warn('Unrecognised bbox value: %s', value)
-                abort(400, 'Unrecognised bbox value: {1}'.format(value))
+                abort(400, 'Unrecognised bbox value: {0}'.format(value))
 
         # acp-ts=t1:t2;
         elif key == 'acp-ts':
-            match = re.match(r'(\d+):(\d+)',values)
-            if match
-                start = match(1)
-                end = match(2)
-                filters.append(sql.SQL('acp_ts between {1} and {2}').format(
+            match = re.match(r'(\d+):(\d+)',value)
+            if match:
+                start = int(match.group(1))
+                end = int(match.group(2))
+                filters.append(sql.SQL('acp_ts between {0} and {1}').format(
                     sql.Literal(start),
                     sql.Literal(end)))
             else:
                 app.logger.warn('Unrecognised acp-ts value: %s', value)
-                abort(400, 'Unrecognised acp-ts value: {1}'.format(value))
+                abort(400, 'Unrecognised acp-ts value: {0}'.format(value))
 
         # field:*=value[,value,...]]
         elif key.startswith('field:'):
@@ -117,26 +124,26 @@ def build_vm_query():
             field = match.group(1)
             if field not in expected_fields:
                 app.logger.warn('Unrecognised field: value: %s', field)
-                abort(400, 'Unrecognised field: value: {1}'.format(field))
-            app.logger.info('  Processing field: %s %s', field, values)
+                abort(400, 'Unrecognised field: value: {0}'.format(field))
+            app.logger.info('  Processing field: %s %s', field, value)
             bits = []
-            for value in re.split(r'\s*,\s*',values):
-                bits.append(sql.SQL('info @> {1}')
-                       .format(sql.Literal(json.dumps({ field: value }))))
+            for val in re.split(r'\s*,\s*',value):
+                bits.append(sql.SQL('info @> {0}')
+                       .format(sql.Literal(json.dumps({ field: val }))))
             filters.append(sql.SQL('(') + sql.SQL(' or ').join(bits) + sql.SQL(')'))
 
         else:
             app.logger.warn('Unexpected query parameter: %s', key)
-            abort(400, 'Unrecognised query parameter: {1}'.format(key))
+            abort(400, 'Unrecognised query parameter: {0}'.format(key))
 
 
     if filters:
-        return (sql.SQL('select info from siri_vm where ') +
+        return (sql.SQL('select info from siri_vm_5 where ') +
             sql.SQL(' and ').join(filters) +
-            sql.SQL(' order by acp_ts asc limit {1}')
+            sql.SQL(' order by acp_ts asc limit {0}')
             .format(sql.Literal(limit)))
     else:
-        return (sql.SQL('select info from siri_vm_5 order by acp_ts asc limit {}')
+        return (sql.SQL('select info from siri_vm_5 order by acp_ts asc limit {0}')
             .format(sql.Literal(limit)))
 
 
