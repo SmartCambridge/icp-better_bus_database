@@ -9,6 +9,7 @@
 \d siri_vm_4
 \d siri_vm_5
 \d siri_vm_5_2017_41
+\d journey
 
 SELECT
     relname as tablename,
@@ -17,7 +18,7 @@ FROM pg_class
 where relname in (
     select tablename
     from pg_tables
-    where tablename like 'siri_v%'
+    where tablename like 'siri_v%' or tablename = 'journey'
 )
 order by tablename;
 
@@ -36,7 +37,7 @@ select
 from (
     select tablename
     from pg_tables
-    where tablename like 'siri_v%'
+    where tablename like 'siri_v%' or tablename = 'journey'
 ) as t(tablename)
 order by tablename;
 
@@ -51,7 +52,7 @@ from (
     where tablename in (
         select tablename
         from pg_tables
-        where tablename like 'siri_v%'
+        where tablename like 'siri_v%' or tablename = 'journey'
     )
 ) as i
 order by tablename, indexname;
