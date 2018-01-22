@@ -59,8 +59,8 @@ print("    BEFORE INSERT ON {}".format(table_base))
 print("    FOR EACH ROW EXECUTE PROCEDURE {}_insert_trigger();".format(table_base))
 
 print()
-print('\copy ${table} (acp_id, acp_lng, acp_lat, acp_ts, location2d, location4d, info)')
-print('FROM PROGRAM \'./"${loader}" "${load_path}"\' (FORMAT CSV, FREEZE TRUE)')
+print('\copy ${table} (acp_id, acp_lng, acp_lat, acp_ts, location2d, location4d, info) ' +
+      'FROM PROGRAM \'./"${loader}" "${load_path}"\' (FORMAT CSV, FREEZE TRUE)')
 print()
 
 start = first
