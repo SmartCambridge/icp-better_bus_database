@@ -366,7 +366,10 @@ CREATE INDEX ${table}_2018_05_acp_ts ON ${table}_2018_05 (acp_ts);
 CREATE INDEX ${table}_2018_05_location2d on ${table}_2018_05 USING GIST (location2d);
 CREATE INDEX ${table}_2018_05_location2d_geom on ${table}_2018_05 USING GIST (cast(location2d as geometry));
 CREATE INDEX ${table}_2018_05_location4d on ${table}_2018_05 USING GIST (location4d);
-CREATE INDEX ${table}_2018_05_location4d_geom_nd on ${tab
+CREATE INDEX ${table}_2018_05_location4d_geom_nd on ${table}_2018_05 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_05_info ON ${table}_2018_05 USING GIN (info);
+
+
 
 -- ---------------------------------------------------------------------
 -- END AUTO GENERATED SECTION
