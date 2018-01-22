@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 
+# Construct the loading code for the 'partitioned' 
+# table layout in the siri_vm_5 layout
+
 import datetime
 
 table_base = '${table}'
@@ -16,6 +19,7 @@ while start < last:
     print()
     print("-- {:.0f} - {:.0f} ({} to {}) {}".format(start.timestamp(), end.timestamp(), start.isoformat(), end.isoformat(), week))
 
+    print("DROP TABLE IF EXISTS {}_{}".format(table_base,week))
     print("CREATE TABLE {}_{} (".format(table_base,week))
     print("    CHECK ( acp_ts >= {:.0f} and acp_ts < {:.0f} )".format(start.timestamp(), end.timestamp()))
     print(") INHERITS ({});".format(table_base))
