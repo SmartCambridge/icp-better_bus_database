@@ -196,6 +196,8 @@ CREATE TRIGGER insert_${table}_trigger
     BEFORE INSERT ON ${table}
     FOR EACH ROW EXECUTE PROCEDURE ${table}_insert_trigger();
 
+\copy ${table} (acp_id, acp_lng, acp_lat, acp_ts, location2d, location4d, info)
+FROM PROGRAM './"${loader}" "${load_path}"' (FORMAT CSV, FREEZE TRUE)
 
 CREATE INDEX ${table}_2017_41_acp_id ON ${table}_2017_41 (acp_id);
 CREATE INDEX ${table}_2017_41_acp_lng ON ${table}_2017_41 (acp_lng);
@@ -364,10 +366,7 @@ CREATE INDEX ${table}_2018_05_acp_ts ON ${table}_2018_05 (acp_ts);
 CREATE INDEX ${table}_2018_05_location2d on ${table}_2018_05 USING GIST (location2d);
 CREATE INDEX ${table}_2018_05_location2d_geom on ${table}_2018_05 USING GIST (cast(location2d as geometry));
 CREATE INDEX ${table}_2018_05_location4d on ${table}_2018_05 USING GIST (location4d);
-CREATE INDEX ${table}_2018_05_location4d_geom_nd on ${table}_2018_05 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
-CREATE INDEX ${table}_2018_05_info ON ${table}_2018_05 USING GIN (info);
-
-
+CREATE INDEX ${table}_2018_05_location4d_geom_nd on ${tab
 
 -- ---------------------------------------------------------------------
 -- END AUTO GENERATED SECTION
