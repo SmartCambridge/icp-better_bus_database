@@ -29,7 +29,7 @@ print()
 print()
 
 print("CREATE OR REPLACE FUNCTION {}_insert_trigger()".format(table_base))
-print("RETURNS TRIGGER AS $$")
+print("RETURNS TRIGGER AS \$\$")
 print("BEGIN")
 predicate='IF'
 start = first
@@ -49,7 +49,7 @@ print("        RAISE EXCEPTION 'Date out of range.  Fix the {}_insert_trigger() 
 print("    END IF;")
 print("    RETURN NULL;")
 print("END;")
-print("$$")
+print("\$\$")
 print("LANGUAGE plpgsql;")    
 
 print()

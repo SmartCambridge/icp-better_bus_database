@@ -131,7 +131,7 @@ CREATE TABLE ${table}_2018_05 (
 
 
 CREATE OR REPLACE FUNCTION ${table}_insert_trigger()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER AS \$\$
 BEGIN
     IF ( NEW.acp_ts >= 1507507200 AND
             NEW.acp_ts < 1508112000 ) THEN
@@ -189,7 +189,7 @@ BEGIN
     END IF;
     RETURN NULL;
 END;
-$$
+\$\$
 LANGUAGE plpgsql;
 
 CREATE TRIGGER insert_${table}_trigger
