@@ -8,7 +8,7 @@ import datetime
 table_base = '${table}'
 
 first=datetime.datetime(2017,10,9,0,0,0,tzinfo=datetime.timezone.utc)
-last =datetime.datetime(2018,1,31,0,0,0,tzinfo=datetime.timezone.utc)
+last =datetime.datetime(2018,6,30,0,0,0,tzinfo=datetime.timezone.utc)
 
 start = first
 while start < last:
