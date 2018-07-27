@@ -45,6 +45,7 @@ CREATE TABLE ${table} (
 -- ---------------------------------------------------------------------
 
 
+
 -- 1507507200 - 1508112000 (2017-10-09T00:00:00+00:00 to 2017-10-16T00:00:00+00:00) 2017_41
 CREATE TABLE ${table}_2017_41 (
     CHECK ( acp_ts >= 1507507200 and acp_ts < 1508112000 )
@@ -235,6 +236,136 @@ CREATE TABLE ${table}_2018_26 (
     CHECK ( acp_ts >= 1529884800 and acp_ts < 1530489600 )
 ) INHERITS (${table});
 
+-- 1530489600 - 1531094400 (2018-07-02T00:00:00+00:00 to 2018-07-09T00:00:00+00:00) 2018_27
+CREATE TABLE ${table}_2018_27 (
+    CHECK ( acp_ts >= 1530489600 and acp_ts < 1531094400 )
+) INHERITS (${table});
+
+-- 1531094400 - 1531699200 (2018-07-09T00:00:00+00:00 to 2018-07-16T00:00:00+00:00) 2018_28
+CREATE TABLE ${table}_2018_28 (
+    CHECK ( acp_ts >= 1531094400 and acp_ts < 1531699200 )
+) INHERITS (${table});
+
+-- 1531699200 - 1532304000 (2018-07-16T00:00:00+00:00 to 2018-07-23T00:00:00+00:00) 2018_29
+CREATE TABLE ${table}_2018_29 (
+    CHECK ( acp_ts >= 1531699200 and acp_ts < 1532304000 )
+) INHERITS (${table});
+
+-- 1532304000 - 1532908800 (2018-07-23T00:00:00+00:00 to 2018-07-30T00:00:00+00:00) 2018_30
+CREATE TABLE ${table}_2018_30 (
+    CHECK ( acp_ts >= 1532304000 and acp_ts < 1532908800 )
+) INHERITS (${table});
+
+-- 1532908800 - 1533513600 (2018-07-30T00:00:00+00:00 to 2018-08-06T00:00:00+00:00) 2018_31
+CREATE TABLE ${table}_2018_31 (
+    CHECK ( acp_ts >= 1532908800 and acp_ts < 1533513600 )
+) INHERITS (${table});
+
+-- 1533513600 - 1534118400 (2018-08-06T00:00:00+00:00 to 2018-08-13T00:00:00+00:00) 2018_32
+CREATE TABLE ${table}_2018_32 (
+    CHECK ( acp_ts >= 1533513600 and acp_ts < 1534118400 )
+) INHERITS (${table});
+
+-- 1534118400 - 1534723200 (2018-08-13T00:00:00+00:00 to 2018-08-20T00:00:00+00:00) 2018_33
+CREATE TABLE ${table}_2018_33 (
+    CHECK ( acp_ts >= 1534118400 and acp_ts < 1534723200 )
+) INHERITS (${table});
+
+-- 1534723200 - 1535328000 (2018-08-20T00:00:00+00:00 to 2018-08-27T00:00:00+00:00) 2018_34
+CREATE TABLE ${table}_2018_34 (
+    CHECK ( acp_ts >= 1534723200 and acp_ts < 1535328000 )
+) INHERITS (${table});
+
+-- 1535328000 - 1535932800 (2018-08-27T00:00:00+00:00 to 2018-09-03T00:00:00+00:00) 2018_35
+CREATE TABLE ${table}_2018_35 (
+    CHECK ( acp_ts >= 1535328000 and acp_ts < 1535932800 )
+) INHERITS (${table});
+
+-- 1535932800 - 1536537600 (2018-09-03T00:00:00+00:00 to 2018-09-10T00:00:00+00:00) 2018_36
+CREATE TABLE ${table}_2018_36 (
+    CHECK ( acp_ts >= 1535932800 and acp_ts < 1536537600 )
+) INHERITS (${table});
+
+-- 1536537600 - 1537142400 (2018-09-10T00:00:00+00:00 to 2018-09-17T00:00:00+00:00) 2018_37
+CREATE TABLE ${table}_2018_37 (
+    CHECK ( acp_ts >= 1536537600 and acp_ts < 1537142400 )
+) INHERITS (${table});
+
+-- 1537142400 - 1537747200 (2018-09-17T00:00:00+00:00 to 2018-09-24T00:00:00+00:00) 2018_38
+CREATE TABLE ${table}_2018_38 (
+    CHECK ( acp_ts >= 1537142400 and acp_ts < 1537747200 )
+) INHERITS (${table});
+
+-- 1537747200 - 1538352000 (2018-09-24T00:00:00+00:00 to 2018-10-01T00:00:00+00:00) 2018_39
+CREATE TABLE ${table}_2018_39 (
+    CHECK ( acp_ts >= 1537747200 and acp_ts < 1538352000 )
+) INHERITS (${table});
+
+-- 1538352000 - 1538956800 (2018-10-01T00:00:00+00:00 to 2018-10-08T00:00:00+00:00) 2018_40
+CREATE TABLE ${table}_2018_40 (
+    CHECK ( acp_ts >= 1538352000 and acp_ts < 1538956800 )
+) INHERITS (${table});
+
+-- 1538956800 - 1539561600 (2018-10-08T00:00:00+00:00 to 2018-10-15T00:00:00+00:00) 2018_41
+CREATE TABLE ${table}_2018_41 (
+    CHECK ( acp_ts >= 1538956800 and acp_ts < 1539561600 )
+) INHERITS (${table});
+
+-- 1539561600 - 1540166400 (2018-10-15T00:00:00+00:00 to 2018-10-22T00:00:00+00:00) 2018_42
+CREATE TABLE ${table}_2018_42 (
+    CHECK ( acp_ts >= 1539561600 and acp_ts < 1540166400 )
+) INHERITS (${table});
+
+-- 1540166400 - 1540771200 (2018-10-22T00:00:00+00:00 to 2018-10-29T00:00:00+00:00) 2018_43
+CREATE TABLE ${table}_2018_43 (
+    CHECK ( acp_ts >= 1540166400 and acp_ts < 1540771200 )
+) INHERITS (${table});
+
+-- 1540771200 - 1541376000 (2018-10-29T00:00:00+00:00 to 2018-11-05T00:00:00+00:00) 2018_44
+CREATE TABLE ${table}_2018_44 (
+    CHECK ( acp_ts >= 1540771200 and acp_ts < 1541376000 )
+) INHERITS (${table});
+
+-- 1541376000 - 1541980800 (2018-11-05T00:00:00+00:00 to 2018-11-12T00:00:00+00:00) 2018_45
+CREATE TABLE ${table}_2018_45 (
+    CHECK ( acp_ts >= 1541376000 and acp_ts < 1541980800 )
+) INHERITS (${table});
+
+-- 1541980800 - 1542585600 (2018-11-12T00:00:00+00:00 to 2018-11-19T00:00:00+00:00) 2018_46
+CREATE TABLE ${table}_2018_46 (
+    CHECK ( acp_ts >= 1541980800 and acp_ts < 1542585600 )
+) INHERITS (${table});
+
+-- 1542585600 - 1543190400 (2018-11-19T00:00:00+00:00 to 2018-11-26T00:00:00+00:00) 2018_47
+CREATE TABLE ${table}_2018_47 (
+    CHECK ( acp_ts >= 1542585600 and acp_ts < 1543190400 )
+) INHERITS (${table});
+
+-- 1543190400 - 1543795200 (2018-11-26T00:00:00+00:00 to 2018-12-03T00:00:00+00:00) 2018_48
+CREATE TABLE ${table}_2018_48 (
+    CHECK ( acp_ts >= 1543190400 and acp_ts < 1543795200 )
+) INHERITS (${table});
+
+-- 1543795200 - 1544400000 (2018-12-03T00:00:00+00:00 to 2018-12-10T00:00:00+00:00) 2018_49
+CREATE TABLE ${table}_2018_49 (
+    CHECK ( acp_ts >= 1543795200 and acp_ts < 1544400000 )
+) INHERITS (${table});
+
+-- 1544400000 - 1545004800 (2018-12-10T00:00:00+00:00 to 2018-12-17T00:00:00+00:00) 2018_50
+CREATE TABLE ${table}_2018_50 (
+    CHECK ( acp_ts >= 1544400000 and acp_ts < 1545004800 )
+) INHERITS (${table});
+
+-- 1545004800 - 1545609600 (2018-12-17T00:00:00+00:00 to 2018-12-24T00:00:00+00:00) 2018_51
+CREATE TABLE ${table}_2018_51 (
+    CHECK ( acp_ts >= 1545004800 and acp_ts < 1545609600 )
+) INHERITS (${table});
+
+-- 1545609600 - 1546214400 (2018-12-24T00:00:00+00:00 to 2018-12-31T00:00:00+00:00) 2018_52
+CREATE TABLE ${table}_2018_52 (
+    CHECK ( acp_ts >= 1545609600 and acp_ts < 1546214400 )
+) INHERITS (${table});
+
 
 CREATE OR REPLACE FUNCTION ${table}_insert_trigger()
 RETURNS TRIGGER AS \$\$
@@ -353,6 +484,84 @@ BEGIN
     ELSIF ( NEW.acp_ts >= 1529884800 AND
             NEW.acp_ts < 1530489600 ) THEN
        INSERT INTO ${table}_2018_26 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1530489600 AND
+            NEW.acp_ts < 1531094400 ) THEN
+       INSERT INTO ${table}_2018_27 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1531094400 AND
+            NEW.acp_ts < 1531699200 ) THEN
+       INSERT INTO ${table}_2018_28 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1531699200 AND
+            NEW.acp_ts < 1532304000 ) THEN
+       INSERT INTO ${table}_2018_29 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1532304000 AND
+            NEW.acp_ts < 1532908800 ) THEN
+       INSERT INTO ${table}_2018_30 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1532908800 AND
+            NEW.acp_ts < 1533513600 ) THEN
+       INSERT INTO ${table}_2018_31 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1533513600 AND
+            NEW.acp_ts < 1534118400 ) THEN
+       INSERT INTO ${table}_2018_32 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1534118400 AND
+            NEW.acp_ts < 1534723200 ) THEN
+       INSERT INTO ${table}_2018_33 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1534723200 AND
+            NEW.acp_ts < 1535328000 ) THEN
+       INSERT INTO ${table}_2018_34 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1535328000 AND
+            NEW.acp_ts < 1535932800 ) THEN
+       INSERT INTO ${table}_2018_35 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1535932800 AND
+            NEW.acp_ts < 1536537600 ) THEN
+       INSERT INTO ${table}_2018_36 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1536537600 AND
+            NEW.acp_ts < 1537142400 ) THEN
+       INSERT INTO ${table}_2018_37 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1537142400 AND
+            NEW.acp_ts < 1537747200 ) THEN
+       INSERT INTO ${table}_2018_38 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1537747200 AND
+            NEW.acp_ts < 1538352000 ) THEN
+       INSERT INTO ${table}_2018_39 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1538352000 AND
+            NEW.acp_ts < 1538956800 ) THEN
+       INSERT INTO ${table}_2018_40 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1538956800 AND
+            NEW.acp_ts < 1539561600 ) THEN
+       INSERT INTO ${table}_2018_41 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1539561600 AND
+            NEW.acp_ts < 1540166400 ) THEN
+       INSERT INTO ${table}_2018_42 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1540166400 AND
+            NEW.acp_ts < 1540771200 ) THEN
+       INSERT INTO ${table}_2018_43 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1540771200 AND
+            NEW.acp_ts < 1541376000 ) THEN
+       INSERT INTO ${table}_2018_44 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1541376000 AND
+            NEW.acp_ts < 1541980800 ) THEN
+       INSERT INTO ${table}_2018_45 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1541980800 AND
+            NEW.acp_ts < 1542585600 ) THEN
+       INSERT INTO ${table}_2018_46 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1542585600 AND
+            NEW.acp_ts < 1543190400 ) THEN
+       INSERT INTO ${table}_2018_47 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1543190400 AND
+            NEW.acp_ts < 1543795200 ) THEN
+       INSERT INTO ${table}_2018_48 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1543795200 AND
+            NEW.acp_ts < 1544400000 ) THEN
+       INSERT INTO ${table}_2018_49 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1544400000 AND
+            NEW.acp_ts < 1545004800 ) THEN
+       INSERT INTO ${table}_2018_50 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1545004800 AND
+            NEW.acp_ts < 1545609600 ) THEN
+       INSERT INTO ${table}_2018_51 VALUES (NEW.*);
+    ELSIF ( NEW.acp_ts >= 1545609600 AND
+            NEW.acp_ts < 1546214400 ) THEN
+       INSERT INTO ${table}_2018_52 VALUES (NEW.*);
     ELSE
         RAISE EXCEPTION 'Date out of range.  Fix the ${table}_insert_trigger() function!';
     END IF;
@@ -746,6 +955,267 @@ CREATE INDEX ${table}_2018_26_location2d_geom on ${table}_2018_26 USING GIST (ca
 CREATE INDEX ${table}_2018_26_location4d on ${table}_2018_26 USING GIST (location4d);
 CREATE INDEX ${table}_2018_26_location4d_geom_nd on ${table}_2018_26 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
 CREATE INDEX ${table}_2018_26_info ON ${table}_2018_26 USING GIN (info);
+
+CREATE INDEX ${table}_2018_27_acp_id ON ${table}_2018_27 (acp_id);
+CREATE INDEX ${table}_2018_27_acp_lng ON ${table}_2018_27 (acp_lng);
+CREATE INDEX ${table}_2018_27_acp_lat ON ${table}_2018_27 (acp_lat);
+CREATE INDEX ${table}_2018_27_acp_ts ON ${table}_2018_27 (acp_ts);
+CREATE INDEX ${table}_2018_27_location2d on ${table}_2018_27 USING GIST (location2d);
+CREATE INDEX ${table}_2018_27_location2d_geom on ${table}_2018_27 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_27_location4d on ${table}_2018_27 USING GIST (location4d);
+CREATE INDEX ${table}_2018_27_location4d_geom_nd on ${table}_2018_27 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_27_info ON ${table}_2018_27 USING GIN (info);
+
+CREATE INDEX ${table}_2018_28_acp_id ON ${table}_2018_28 (acp_id);
+CREATE INDEX ${table}_2018_28_acp_lng ON ${table}_2018_28 (acp_lng);
+CREATE INDEX ${table}_2018_28_acp_lat ON ${table}_2018_28 (acp_lat);
+CREATE INDEX ${table}_2018_28_acp_ts ON ${table}_2018_28 (acp_ts);
+CREATE INDEX ${table}_2018_28_location2d on ${table}_2018_28 USING GIST (location2d);
+CREATE INDEX ${table}_2018_28_location2d_geom on ${table}_2018_28 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_28_location4d on ${table}_2018_28 USING GIST (location4d);
+CREATE INDEX ${table}_2018_28_location4d_geom_nd on ${table}_2018_28 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_28_info ON ${table}_2018_28 USING GIN (info);
+
+CREATE INDEX ${table}_2018_29_acp_id ON ${table}_2018_29 (acp_id);
+CREATE INDEX ${table}_2018_29_acp_lng ON ${table}_2018_29 (acp_lng);
+CREATE INDEX ${table}_2018_29_acp_lat ON ${table}_2018_29 (acp_lat);
+CREATE INDEX ${table}_2018_29_acp_ts ON ${table}_2018_29 (acp_ts);
+CREATE INDEX ${table}_2018_29_location2d on ${table}_2018_29 USING GIST (location2d);
+CREATE INDEX ${table}_2018_29_location2d_geom on ${table}_2018_29 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_29_location4d on ${table}_2018_29 USING GIST (location4d);
+CREATE INDEX ${table}_2018_29_location4d_geom_nd on ${table}_2018_29 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_29_info ON ${table}_2018_29 USING GIN (info);
+
+CREATE INDEX ${table}_2018_30_acp_id ON ${table}_2018_30 (acp_id);
+CREATE INDEX ${table}_2018_30_acp_lng ON ${table}_2018_30 (acp_lng);
+CREATE INDEX ${table}_2018_30_acp_lat ON ${table}_2018_30 (acp_lat);
+CREATE INDEX ${table}_2018_30_acp_ts ON ${table}_2018_30 (acp_ts);
+CREATE INDEX ${table}_2018_30_location2d on ${table}_2018_30 USING GIST (location2d);
+CREATE INDEX ${table}_2018_30_location2d_geom on ${table}_2018_30 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_30_location4d on ${table}_2018_30 USING GIST (location4d);
+CREATE INDEX ${table}_2018_30_location4d_geom_nd on ${table}_2018_30 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_30_info ON ${table}_2018_30 USING GIN (info);
+
+CREATE INDEX ${table}_2018_31_acp_id ON ${table}_2018_31 (acp_id);
+CREATE INDEX ${table}_2018_31_acp_lng ON ${table}_2018_31 (acp_lng);
+CREATE INDEX ${table}_2018_31_acp_lat ON ${table}_2018_31 (acp_lat);
+CREATE INDEX ${table}_2018_31_acp_ts ON ${table}_2018_31 (acp_ts);
+CREATE INDEX ${table}_2018_31_location2d on ${table}_2018_31 USING GIST (location2d);
+CREATE INDEX ${table}_2018_31_location2d_geom on ${table}_2018_31 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_31_location4d on ${table}_2018_31 USING GIST (location4d);
+CREATE INDEX ${table}_2018_31_location4d_geom_nd on ${table}_2018_31 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_31_info ON ${table}_2018_31 USING GIN (info);
+
+CREATE INDEX ${table}_2018_32_acp_id ON ${table}_2018_32 (acp_id);
+CREATE INDEX ${table}_2018_32_acp_lng ON ${table}_2018_32 (acp_lng);
+CREATE INDEX ${table}_2018_32_acp_lat ON ${table}_2018_32 (acp_lat);
+CREATE INDEX ${table}_2018_32_acp_ts ON ${table}_2018_32 (acp_ts);
+CREATE INDEX ${table}_2018_32_location2d on ${table}_2018_32 USING GIST (location2d);
+CREATE INDEX ${table}_2018_32_location2d_geom on ${table}_2018_32 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_32_location4d on ${table}_2018_32 USING GIST (location4d);
+CREATE INDEX ${table}_2018_32_location4d_geom_nd on ${table}_2018_32 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_32_info ON ${table}_2018_32 USING GIN (info);
+
+CREATE INDEX ${table}_2018_33_acp_id ON ${table}_2018_33 (acp_id);
+CREATE INDEX ${table}_2018_33_acp_lng ON ${table}_2018_33 (acp_lng);
+CREATE INDEX ${table}_2018_33_acp_lat ON ${table}_2018_33 (acp_lat);
+CREATE INDEX ${table}_2018_33_acp_ts ON ${table}_2018_33 (acp_ts);
+CREATE INDEX ${table}_2018_33_location2d on ${table}_2018_33 USING GIST (location2d);
+CREATE INDEX ${table}_2018_33_location2d_geom on ${table}_2018_33 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_33_location4d on ${table}_2018_33 USING GIST (location4d);
+CREATE INDEX ${table}_2018_33_location4d_geom_nd on ${table}_2018_33 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_33_info ON ${table}_2018_33 USING GIN (info);
+
+CREATE INDEX ${table}_2018_34_acp_id ON ${table}_2018_34 (acp_id);
+CREATE INDEX ${table}_2018_34_acp_lng ON ${table}_2018_34 (acp_lng);
+CREATE INDEX ${table}_2018_34_acp_lat ON ${table}_2018_34 (acp_lat);
+CREATE INDEX ${table}_2018_34_acp_ts ON ${table}_2018_34 (acp_ts);
+CREATE INDEX ${table}_2018_34_location2d on ${table}_2018_34 USING GIST (location2d);
+CREATE INDEX ${table}_2018_34_location2d_geom on ${table}_2018_34 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_34_location4d on ${table}_2018_34 USING GIST (location4d);
+CREATE INDEX ${table}_2018_34_location4d_geom_nd on ${table}_2018_34 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_34_info ON ${table}_2018_34 USING GIN (info);
+
+CREATE INDEX ${table}_2018_35_acp_id ON ${table}_2018_35 (acp_id);
+CREATE INDEX ${table}_2018_35_acp_lng ON ${table}_2018_35 (acp_lng);
+CREATE INDEX ${table}_2018_35_acp_lat ON ${table}_2018_35 (acp_lat);
+CREATE INDEX ${table}_2018_35_acp_ts ON ${table}_2018_35 (acp_ts);
+CREATE INDEX ${table}_2018_35_location2d on ${table}_2018_35 USING GIST (location2d);
+CREATE INDEX ${table}_2018_35_location2d_geom on ${table}_2018_35 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_35_location4d on ${table}_2018_35 USING GIST (location4d);
+CREATE INDEX ${table}_2018_35_location4d_geom_nd on ${table}_2018_35 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_35_info ON ${table}_2018_35 USING GIN (info);
+
+CREATE INDEX ${table}_2018_36_acp_id ON ${table}_2018_36 (acp_id);
+CREATE INDEX ${table}_2018_36_acp_lng ON ${table}_2018_36 (acp_lng);
+CREATE INDEX ${table}_2018_36_acp_lat ON ${table}_2018_36 (acp_lat);
+CREATE INDEX ${table}_2018_36_acp_ts ON ${table}_2018_36 (acp_ts);
+CREATE INDEX ${table}_2018_36_location2d on ${table}_2018_36 USING GIST (location2d);
+CREATE INDEX ${table}_2018_36_location2d_geom on ${table}_2018_36 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_36_location4d on ${table}_2018_36 USING GIST (location4d);
+CREATE INDEX ${table}_2018_36_location4d_geom_nd on ${table}_2018_36 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_36_info ON ${table}_2018_36 USING GIN (info);
+
+CREATE INDEX ${table}_2018_37_acp_id ON ${table}_2018_37 (acp_id);
+CREATE INDEX ${table}_2018_37_acp_lng ON ${table}_2018_37 (acp_lng);
+CREATE INDEX ${table}_2018_37_acp_lat ON ${table}_2018_37 (acp_lat);
+CREATE INDEX ${table}_2018_37_acp_ts ON ${table}_2018_37 (acp_ts);
+CREATE INDEX ${table}_2018_37_location2d on ${table}_2018_37 USING GIST (location2d);
+CREATE INDEX ${table}_2018_37_location2d_geom on ${table}_2018_37 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_37_location4d on ${table}_2018_37 USING GIST (location4d);
+CREATE INDEX ${table}_2018_37_location4d_geom_nd on ${table}_2018_37 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_37_info ON ${table}_2018_37 USING GIN (info);
+
+CREATE INDEX ${table}_2018_38_acp_id ON ${table}_2018_38 (acp_id);
+CREATE INDEX ${table}_2018_38_acp_lng ON ${table}_2018_38 (acp_lng);
+CREATE INDEX ${table}_2018_38_acp_lat ON ${table}_2018_38 (acp_lat);
+CREATE INDEX ${table}_2018_38_acp_ts ON ${table}_2018_38 (acp_ts);
+CREATE INDEX ${table}_2018_38_location2d on ${table}_2018_38 USING GIST (location2d);
+CREATE INDEX ${table}_2018_38_location2d_geom on ${table}_2018_38 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_38_location4d on ${table}_2018_38 USING GIST (location4d);
+CREATE INDEX ${table}_2018_38_location4d_geom_nd on ${table}_2018_38 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_38_info ON ${table}_2018_38 USING GIN (info);
+
+CREATE INDEX ${table}_2018_39_acp_id ON ${table}_2018_39 (acp_id);
+CREATE INDEX ${table}_2018_39_acp_lng ON ${table}_2018_39 (acp_lng);
+CREATE INDEX ${table}_2018_39_acp_lat ON ${table}_2018_39 (acp_lat);
+CREATE INDEX ${table}_2018_39_acp_ts ON ${table}_2018_39 (acp_ts);
+CREATE INDEX ${table}_2018_39_location2d on ${table}_2018_39 USING GIST (location2d);
+CREATE INDEX ${table}_2018_39_location2d_geom on ${table}_2018_39 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_39_location4d on ${table}_2018_39 USING GIST (location4d);
+CREATE INDEX ${table}_2018_39_location4d_geom_nd on ${table}_2018_39 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_39_info ON ${table}_2018_39 USING GIN (info);
+
+CREATE INDEX ${table}_2018_40_acp_id ON ${table}_2018_40 (acp_id);
+CREATE INDEX ${table}_2018_40_acp_lng ON ${table}_2018_40 (acp_lng);
+CREATE INDEX ${table}_2018_40_acp_lat ON ${table}_2018_40 (acp_lat);
+CREATE INDEX ${table}_2018_40_acp_ts ON ${table}_2018_40 (acp_ts);
+CREATE INDEX ${table}_2018_40_location2d on ${table}_2018_40 USING GIST (location2d);
+CREATE INDEX ${table}_2018_40_location2d_geom on ${table}_2018_40 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_40_location4d on ${table}_2018_40 USING GIST (location4d);
+CREATE INDEX ${table}_2018_40_location4d_geom_nd on ${table}_2018_40 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_40_info ON ${table}_2018_40 USING GIN (info);
+
+CREATE INDEX ${table}_2018_41_acp_id ON ${table}_2018_41 (acp_id);
+CREATE INDEX ${table}_2018_41_acp_lng ON ${table}_2018_41 (acp_lng);
+CREATE INDEX ${table}_2018_41_acp_lat ON ${table}_2018_41 (acp_lat);
+CREATE INDEX ${table}_2018_41_acp_ts ON ${table}_2018_41 (acp_ts);
+CREATE INDEX ${table}_2018_41_location2d on ${table}_2018_41 USING GIST (location2d);
+CREATE INDEX ${table}_2018_41_location2d_geom on ${table}_2018_41 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_41_location4d on ${table}_2018_41 USING GIST (location4d);
+CREATE INDEX ${table}_2018_41_location4d_geom_nd on ${table}_2018_41 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_41_info ON ${table}_2018_41 USING GIN (info);
+
+CREATE INDEX ${table}_2018_42_acp_id ON ${table}_2018_42 (acp_id);
+CREATE INDEX ${table}_2018_42_acp_lng ON ${table}_2018_42 (acp_lng);
+CREATE INDEX ${table}_2018_42_acp_lat ON ${table}_2018_42 (acp_lat);
+CREATE INDEX ${table}_2018_42_acp_ts ON ${table}_2018_42 (acp_ts);
+CREATE INDEX ${table}_2018_42_location2d on ${table}_2018_42 USING GIST (location2d);
+CREATE INDEX ${table}_2018_42_location2d_geom on ${table}_2018_42 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_42_location4d on ${table}_2018_42 USING GIST (location4d);
+CREATE INDEX ${table}_2018_42_location4d_geom_nd on ${table}_2018_42 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_42_info ON ${table}_2018_42 USING GIN (info);
+
+CREATE INDEX ${table}_2018_43_acp_id ON ${table}_2018_43 (acp_id);
+CREATE INDEX ${table}_2018_43_acp_lng ON ${table}_2018_43 (acp_lng);
+CREATE INDEX ${table}_2018_43_acp_lat ON ${table}_2018_43 (acp_lat);
+CREATE INDEX ${table}_2018_43_acp_ts ON ${table}_2018_43 (acp_ts);
+CREATE INDEX ${table}_2018_43_location2d on ${table}_2018_43 USING GIST (location2d);
+CREATE INDEX ${table}_2018_43_location2d_geom on ${table}_2018_43 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_43_location4d on ${table}_2018_43 USING GIST (location4d);
+CREATE INDEX ${table}_2018_43_location4d_geom_nd on ${table}_2018_43 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_43_info ON ${table}_2018_43 USING GIN (info);
+
+CREATE INDEX ${table}_2018_44_acp_id ON ${table}_2018_44 (acp_id);
+CREATE INDEX ${table}_2018_44_acp_lng ON ${table}_2018_44 (acp_lng);
+CREATE INDEX ${table}_2018_44_acp_lat ON ${table}_2018_44 (acp_lat);
+CREATE INDEX ${table}_2018_44_acp_ts ON ${table}_2018_44 (acp_ts);
+CREATE INDEX ${table}_2018_44_location2d on ${table}_2018_44 USING GIST (location2d);
+CREATE INDEX ${table}_2018_44_location2d_geom on ${table}_2018_44 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_44_location4d on ${table}_2018_44 USING GIST (location4d);
+CREATE INDEX ${table}_2018_44_location4d_geom_nd on ${table}_2018_44 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_44_info ON ${table}_2018_44 USING GIN (info);
+
+CREATE INDEX ${table}_2018_45_acp_id ON ${table}_2018_45 (acp_id);
+CREATE INDEX ${table}_2018_45_acp_lng ON ${table}_2018_45 (acp_lng);
+CREATE INDEX ${table}_2018_45_acp_lat ON ${table}_2018_45 (acp_lat);
+CREATE INDEX ${table}_2018_45_acp_ts ON ${table}_2018_45 (acp_ts);
+CREATE INDEX ${table}_2018_45_location2d on ${table}_2018_45 USING GIST (location2d);
+CREATE INDEX ${table}_2018_45_location2d_geom on ${table}_2018_45 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_45_location4d on ${table}_2018_45 USING GIST (location4d);
+CREATE INDEX ${table}_2018_45_location4d_geom_nd on ${table}_2018_45 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_45_info ON ${table}_2018_45 USING GIN (info);
+
+CREATE INDEX ${table}_2018_46_acp_id ON ${table}_2018_46 (acp_id);
+CREATE INDEX ${table}_2018_46_acp_lng ON ${table}_2018_46 (acp_lng);
+CREATE INDEX ${table}_2018_46_acp_lat ON ${table}_2018_46 (acp_lat);
+CREATE INDEX ${table}_2018_46_acp_ts ON ${table}_2018_46 (acp_ts);
+CREATE INDEX ${table}_2018_46_location2d on ${table}_2018_46 USING GIST (location2d);
+CREATE INDEX ${table}_2018_46_location2d_geom on ${table}_2018_46 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_46_location4d on ${table}_2018_46 USING GIST (location4d);
+CREATE INDEX ${table}_2018_46_location4d_geom_nd on ${table}_2018_46 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_46_info ON ${table}_2018_46 USING GIN (info);
+
+CREATE INDEX ${table}_2018_47_acp_id ON ${table}_2018_47 (acp_id);
+CREATE INDEX ${table}_2018_47_acp_lng ON ${table}_2018_47 (acp_lng);
+CREATE INDEX ${table}_2018_47_acp_lat ON ${table}_2018_47 (acp_lat);
+CREATE INDEX ${table}_2018_47_acp_ts ON ${table}_2018_47 (acp_ts);
+CREATE INDEX ${table}_2018_47_location2d on ${table}_2018_47 USING GIST (location2d);
+CREATE INDEX ${table}_2018_47_location2d_geom on ${table}_2018_47 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_47_location4d on ${table}_2018_47 USING GIST (location4d);
+CREATE INDEX ${table}_2018_47_location4d_geom_nd on ${table}_2018_47 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_47_info ON ${table}_2018_47 USING GIN (info);
+
+CREATE INDEX ${table}_2018_48_acp_id ON ${table}_2018_48 (acp_id);
+CREATE INDEX ${table}_2018_48_acp_lng ON ${table}_2018_48 (acp_lng);
+CREATE INDEX ${table}_2018_48_acp_lat ON ${table}_2018_48 (acp_lat);
+CREATE INDEX ${table}_2018_48_acp_ts ON ${table}_2018_48 (acp_ts);
+CREATE INDEX ${table}_2018_48_location2d on ${table}_2018_48 USING GIST (location2d);
+CREATE INDEX ${table}_2018_48_location2d_geom on ${table}_2018_48 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_48_location4d on ${table}_2018_48 USING GIST (location4d);
+CREATE INDEX ${table}_2018_48_location4d_geom_nd on ${table}_2018_48 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_48_info ON ${table}_2018_48 USING GIN (info);
+
+CREATE INDEX ${table}_2018_49_acp_id ON ${table}_2018_49 (acp_id);
+CREATE INDEX ${table}_2018_49_acp_lng ON ${table}_2018_49 (acp_lng);
+CREATE INDEX ${table}_2018_49_acp_lat ON ${table}_2018_49 (acp_lat);
+CREATE INDEX ${table}_2018_49_acp_ts ON ${table}_2018_49 (acp_ts);
+CREATE INDEX ${table}_2018_49_location2d on ${table}_2018_49 USING GIST (location2d);
+CREATE INDEX ${table}_2018_49_location2d_geom on ${table}_2018_49 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_49_location4d on ${table}_2018_49 USING GIST (location4d);
+CREATE INDEX ${table}_2018_49_location4d_geom_nd on ${table}_2018_49 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_49_info ON ${table}_2018_49 USING GIN (info);
+
+CREATE INDEX ${table}_2018_50_acp_id ON ${table}_2018_50 (acp_id);
+CREATE INDEX ${table}_2018_50_acp_lng ON ${table}_2018_50 (acp_lng);
+CREATE INDEX ${table}_2018_50_acp_lat ON ${table}_2018_50 (acp_lat);
+CREATE INDEX ${table}_2018_50_acp_ts ON ${table}_2018_50 (acp_ts);
+CREATE INDEX ${table}_2018_50_location2d on ${table}_2018_50 USING GIST (location2d);
+CREATE INDEX ${table}_2018_50_location2d_geom on ${table}_2018_50 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_50_location4d on ${table}_2018_50 USING GIST (location4d);
+CREATE INDEX ${table}_2018_50_location4d_geom_nd on ${table}_2018_50 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_50_info ON ${table}_2018_50 USING GIN (info);
+
+CREATE INDEX ${table}_2018_51_acp_id ON ${table}_2018_51 (acp_id);
+CREATE INDEX ${table}_2018_51_acp_lng ON ${table}_2018_51 (acp_lng);
+CREATE INDEX ${table}_2018_51_acp_lat ON ${table}_2018_51 (acp_lat);
+CREATE INDEX ${table}_2018_51_acp_ts ON ${table}_2018_51 (acp_ts);
+CREATE INDEX ${table}_2018_51_location2d on ${table}_2018_51 USING GIST (location2d);
+CREATE INDEX ${table}_2018_51_location2d_geom on ${table}_2018_51 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_51_location4d on ${table}_2018_51 USING GIST (location4d);
+CREATE INDEX ${table}_2018_51_location4d_geom_nd on ${table}_2018_51 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_51_info ON ${table}_2018_51 USING GIN (info);
+
+CREATE INDEX ${table}_2018_52_acp_id ON ${table}_2018_52 (acp_id);
+CREATE INDEX ${table}_2018_52_acp_lng ON ${table}_2018_52 (acp_lng);
+CREATE INDEX ${table}_2018_52_acp_lat ON ${table}_2018_52 (acp_lat);
+CREATE INDEX ${table}_2018_52_acp_ts ON ${table}_2018_52 (acp_ts);
+CREATE INDEX ${table}_2018_52_location2d on ${table}_2018_52 USING GIST (location2d);
+CREATE INDEX ${table}_2018_52_location2d_geom on ${table}_2018_52 USING GIST (cast(location2d as geometry));
+CREATE INDEX ${table}_2018_52_location4d on ${table}_2018_52 USING GIST (location4d);
+CREATE INDEX ${table}_2018_52_location4d_geom_nd on ${table}_2018_52 USING GIST (cast(location4d as geometry) gist_geometry_ops_nd);
+CREATE INDEX ${table}_2018_52_info ON ${table}_2018_52 USING GIN (info);
+
 
 
 
